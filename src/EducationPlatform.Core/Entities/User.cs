@@ -10,7 +10,7 @@ namespace EducationPlatform.Core.Entities
         public string? Password { get; set; }
         public DateTime Birthdate { get; set; }
         public string? Document { get; set; }
-        public string? Cellphone { get; set; }
+        public string? Phone { get; set; }
         public Role Role { get; set; }
     }
 }
