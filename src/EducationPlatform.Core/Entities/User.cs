@@ -12,5 +12,6 @@ namespace EducationPlatform.Core.Entities
         public string? Document { get; set; }
         public string? Phone { get; set; }
         public Role Role { get; set; }
+        public bool IsActive { get; set; }
     }
 }

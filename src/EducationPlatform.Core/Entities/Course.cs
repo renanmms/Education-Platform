@@ -7,5 +7,8 @@ namespace EducationPlatform.Core.Entities
         public string? Description { get; set; }
         public string? Cover { get; set; }
         public DateTime CreatedAt { get; set; }
+        public Guid SubscriptionId { get; set; }
+        public Subscription Subscription { get; set; } = null!;
+        public List<Module> Modules { get; set; } = [];
     }
 }
