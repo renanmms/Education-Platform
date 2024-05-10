@@ -1,6 +1,3 @@
-using EducationPlatform.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,10 +7,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("EducationPlatformCS");
-builder.Services.AddDbContext<EducationPlatformDbContext>(
-    options => options.UseNpgsql(connectionString)
-);
 
 var app = builder.Build();
 
