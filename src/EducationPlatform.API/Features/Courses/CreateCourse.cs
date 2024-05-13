@@ -1,31 +1,32 @@
-using Carter;
-using EducationPlatform.API.Contracts;
 using EducationPlatform.API.Entities;
 using EducationPlatform.API.Persistence;
 using EducationPlatform.API.Shared;
 using FluentValidation;
-using Mapster;
 using MediatR;
-using static EducationPlatform.API.Features.Courses.CreateCourse;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EducationPlatform.API.Features.Courses
-{
-    public class CreateCourseEndpoint : ICarterModule
+{   
+    [ApiController]
+    public class CreateCourseController : ControllerBase
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        private readonly IMediator _mediator;
+
+        public CreateCourseController(IMediator mediator)
         {
-            app.MapPost("api/courses", async (CreateCourseRequest request, ISender sender) => 
+            _mediator = mediator;
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> Create(CreateCourse.Command command)
+        {
+            var result = await _mediator.Send(command);
+            if(result.IsFailure)
             {
-                var command = request.Adapt<Command>();
+                return BadRequest(result.Error);
+            }
 
-                var result = await sender.Send(command);
-                if(result.IsFailure)
-                {
-                    return Results.BadRequest(result.Error);
-                }
-
-                return Results.Ok(result.Value);
-            });
+            return Ok(result.Value);
         }
     }
 
