@@ -3,32 +3,31 @@ using EducationPlatform.API.Contracts;
 using EducationPlatform.API.Persistence;
 using EducationPlatform.API.Shared;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EducationPlatform.API.Features.Courses
 {
-    public class GetCourseEndpoint : ICarterModule
+    public class GetCourseController : ControllerBase 
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        private readonly IMediator _mediator;
+        public GetCourseController(IMediator mediator)
         {
-            app.MapGet("api/courses/{id}", async (Guid id, ISender sender) => 
+            _mediator = mediator;    
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(GetCourse.Query query)
+        {
+            var result = await _mediator.Send(query);
+            if(result.IsFailure)
             {
-                var query = new GetCourse.Query {
-                    Id = id
-                };
-
-                var result = await sender.Send(query);
-
-                if(result.IsFailure)
-                {
-                    return Results.NotFound(result.Error);
-                }
-
-                return Results.Ok(result.Value);
-            });
+                return BadRequest(result.Error);
+            }
+            
+            return Ok(result.Value);
         }
     }
-
 
     public static class GetCourse
     {
