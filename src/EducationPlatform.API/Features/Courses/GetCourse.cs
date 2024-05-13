@@ -1,4 +1,3 @@
-using Carter;
 using EducationPlatform.API.Contracts;
 using EducationPlatform.API.Persistence;
 using EducationPlatform.API.Shared;
@@ -8,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducationPlatform.API.Features.Courses
 {
+    [ApiController]
     public class GetCourseController : ControllerBase 
     {
         private readonly IMediator _mediator;
