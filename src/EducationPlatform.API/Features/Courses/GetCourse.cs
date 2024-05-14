@@ -7,18 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducationPlatform.API.Features.Courses
 {
-    [ApiController]
-    public class GetCourseController : ControllerBase 
+    public partial class CourseController : ControllerBase 
     {
-        private readonly IMediator _mediator;
-        public GetCourseController(IMediator mediator)
-        {
-            _mediator = mediator;    
-        }
-
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(GetCourse.Query query)
+        public async Task<IActionResult> Get(Guid id)
         {
+            var query = new GetCourse.Query(id);
             var result = await _mediator.Send(query);
             if(result.IsFailure)
             {
@@ -33,6 +27,11 @@ namespace EducationPlatform.API.Features.Courses
     {
         public class Query : IRequest<Result<GetCourseResponse>>
         {
+            public Query(Guid id)
+            {
+                Id = id;
+            }
+
             public Guid Id { get; set; }
         }
 
