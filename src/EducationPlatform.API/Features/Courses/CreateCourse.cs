@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace EducationPlatform.API.Features.Courses
 {   
     [ApiController]
-    public class CreateCourseController : ControllerBase
+    public partial class CourseController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public CreateCourseController(IMediator mediator)
+        public CourseController(IMediator mediator)
         {
             _mediator = mediator;
         }
