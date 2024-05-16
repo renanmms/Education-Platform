@@ -1,4 +1,7 @@
+using EducationPlatform.Application.Commands.CreateCourse;
+using EducationPlatform.Core.Interfaces.Repositories;
 using EducationPlatform.Infrastructure.Persistence;
+using EducationPlatform.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,10 @@ var connectionString = builder.Configuration.GetConnectionString("EducationPlatf
 builder.Services.AddDbContext<EducationPlatformDbContext>(
     options => options.UseNpgsql(connectionString)
 );
+
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCourseCommand>());
 
 var app = builder.Build();
 
