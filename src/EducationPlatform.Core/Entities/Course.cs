@@ -2,6 +2,14 @@ namespace EducationPlatform.Core.Entities
 {
     public class Course
     {
+        public Course(string? name, string? description, string? cover, DateTime createdAt)
+        {
+            Name = name;
+            Description = description;
+            Cover = cover;
+            CreatedAt = createdAt;
+        }
+
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
