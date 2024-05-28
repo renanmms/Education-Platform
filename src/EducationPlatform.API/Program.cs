@@ -19,6 +19,7 @@ builder.Services.AddDbContext<EducationPlatformDbContext>(
 );
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCourseCommand>());
 
