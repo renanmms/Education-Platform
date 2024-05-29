@@ -6,5 +6,6 @@ namespace EducationPlatform.Application.Commands.CreateCourse
         string? Name,
         string? Description,
         string? Cover,
-        DateTime CreatedAt) : IRequest<Guid>;
+        DateTime CreatedAt, 
+        Guid SubscriptionId) : IRequest<Guid>;
 }
