@@ -1,6 +1,4 @@
-using System;
 using EducationPlatform.Core.Entities;
-using Npgsql.Replication;
 
 namespace EducationPlatform.Application.DTO.ViewModels
 {
