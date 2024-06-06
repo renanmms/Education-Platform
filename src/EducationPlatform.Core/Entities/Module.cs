@@ -16,6 +16,6 @@ namespace EducationPlatform.Core.Entities
         public DateTime CreatedAt { get; set; }
         public Guid CourseId { get; set; }
         public Course Course { get; set; } = null!;
-        public List<Class> Classes { get; set; } = [];
+        public List<Classroom> Classes { get; set; } = [];
     }
 }
