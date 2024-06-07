@@ -20,7 +20,7 @@ namespace EducationPlatform.Infrastructure.Repositories
             return module.Id;
         }
 
-        public async Task<Module> GetByIdAsync(Guid id)
+        public async Task<Module?> GetByIdAsync(Guid id)
         {
             var module = await _dbContext.Modules.SingleOrDefaultAsync(m => m.Id == id);
             return module;

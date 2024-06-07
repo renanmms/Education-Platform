@@ -5,6 +5,6 @@ namespace EducationPlatform.Core.Interfaces.Repositories
     public interface IClassRepository
     {
         Task<Guid> CreateAsync(Classroom myClass);
-        Task<Classroom> GetByIdAsync(Guid id);
+        Task<Classroom?> GetByIdAsync(Guid id);
     }
 }

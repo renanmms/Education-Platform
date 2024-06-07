@@ -21,7 +21,7 @@ namespace EducationPlatform.Infrastructure.Repositories
         }
 
         // TODO: Adjust possible null references
-        public async Task<Classroom> GetByIdAsync(Guid id)
+        public async Task<Classroom?> GetByIdAsync(Guid id)
         {
             var classroom = await _dbContext.Classes.SingleOrDefaultAsync(c => c.Id == id);
             return classroom;

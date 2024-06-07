@@ -20,7 +20,7 @@ namespace EducationPlatform.Infrastructure.Repositories
             return subscription.Id;
         }
 
-        public async Task<Subscription> GetByIdAsync(Guid id)
+        public async Task<Subscription?> GetByIdAsync(Guid id)
         {
             var sub =  await _dbContext.Subscriptions.SingleOrDefaultAsync(s => s.Id == id);
             return sub;
