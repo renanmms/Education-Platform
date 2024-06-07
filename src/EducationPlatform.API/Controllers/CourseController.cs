@@ -16,9 +16,13 @@ namespace EducationPlatform.API.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var query = new GetCourseQuery(id);
-            var course = await _mediator.Send(query);
+            var result = await _mediator.Send(query);
 
-            return Ok(course);
+            if(result.IsSuccess){
+                return Ok(result.Value);
+            }
+
+            return BadRequest(result.Error);
         }
 
         [HttpPost("create")]
