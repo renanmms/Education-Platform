@@ -1,5 +1,6 @@
 using EducationPlatform.Application.Commands.CreateCourse;
 using EducationPlatform.Application.Queries.GetCourse;
+using EducationPlatform.Application.Validators;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,18 @@ namespace EducationPlatform.API.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var query = new GetCourseQuery(id);
+            var validator = new GetCourseQueryValidator();
+            var validationResult = validator.Validate(query);
+
+            if(!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.ToString("~"));
+            }
+
             var result = await _mediator.Send(query);
 
-            if(result.IsSuccess){
+            if(result.IsSuccess)
+            {
                 return Ok(result.Value);
             }
 
@@ -28,6 +38,14 @@ namespace EducationPlatform.API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create(CreateCourseCommand command)
         {
+            var validator = new CreateCourseCommandValidator();
+            var validationResult = validator.Validate(command);
+
+            if(!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.ToString("~"));
+            }
+
             var id = await _mediator.Send(command);
             return CreatedAtAction(nameof(GetById), new {id = id}, command);
         }       
