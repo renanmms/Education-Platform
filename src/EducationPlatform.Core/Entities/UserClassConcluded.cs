@@ -7,5 +7,7 @@ namespace EducationPlatform.Core.Entities
         public Guid ClassId { get; set; }
         public DateTime ConclusionDate { get; set; }
         public int Score { get; set; }
+        public User? User { get; set; } = null!;
+        public Classroom? Class { get; set; } = null!;
     }
 }

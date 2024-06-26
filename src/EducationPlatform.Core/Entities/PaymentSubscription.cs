@@ -13,5 +13,6 @@ namespace EducationPlatform.Core.Entities
         public string? PaymentLink { get; set; }
         public string? ExternalPaymentId { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public UserSubscription? UserSubscription { get; set; }
     }
 }
