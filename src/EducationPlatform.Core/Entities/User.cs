@@ -4,6 +4,17 @@ namespace EducationPlatform.Core.Entities
 {
     public class User
     {
+        public User(string? fullname, string? email, string? password, DateTime birthdate, string? document, string? phone, Role role)
+        {
+            Fullname = fullname;
+            Email = email;
+            Password = password;
+            Birthdate = birthdate;
+            Document = document;
+            Phone = phone;
+            Role = role;
+        }
+
         public Guid Id { get; set; }
         public string? Fullname { get; set; }
         public string? Email { get; set; }
