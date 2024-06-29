@@ -6,5 +6,6 @@ namespace EducationPlatform.Core.Interfaces.Repositories
     {
         Task<Guid> CreateAsync(Subscription subscription);
         Task<Subscription?> GetByIdAsync(Guid id);
+        Task<Guid> PaySubscritionAsync(PaymentSubscription payment);
     }
 }

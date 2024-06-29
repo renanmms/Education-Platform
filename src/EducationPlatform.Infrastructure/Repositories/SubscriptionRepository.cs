@@ -25,5 +25,12 @@ namespace EducationPlatform.Infrastructure.Repositories
             var sub =  await _dbContext.Subscriptions.SingleOrDefaultAsync(s => s.Id == id);
             return sub;
         }
+
+        public async Task<Guid> PaySubscritionAsync(PaymentSubscription payment)
+        {
+            await _dbContext.PaymentSubscriptions.AddAsync(payment);
+
+            return payment.Id;
+        }
     }
 }
