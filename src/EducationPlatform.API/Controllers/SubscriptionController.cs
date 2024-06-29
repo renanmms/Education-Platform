@@ -21,6 +21,7 @@ namespace EducationPlatform.API.Controllers
         {
             var query = new GetSubscriptionQuery(id);
             var sub = await _mediator.Send(query);
+
             return Ok(sub);
         }
 
@@ -28,6 +29,7 @@ namespace EducationPlatform.API.Controllers
         public async Task<IActionResult> Create(CreateSubscriptionCommand command)
         {
             var id = await _mediator.Send(command);
+
             return CreatedAtAction(nameof(GetById), new {id = id}, command);
         }
 

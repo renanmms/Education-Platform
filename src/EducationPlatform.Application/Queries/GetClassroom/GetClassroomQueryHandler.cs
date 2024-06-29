@@ -15,6 +15,7 @@ namespace EducationPlatform.Application.Queries.GetClassroom
         public async Task<GetClassroomViewModel> Handle(GetClassroomQuery request, CancellationToken cancellationToken)
         {
             var classroom = await _repository.GetByIdAsync(request.Id);
+
             return GetClassroomViewModel.ToDTO(classroom);
         }
     }

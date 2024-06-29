@@ -20,6 +20,7 @@ namespace EducationPlatform.Application.Commands.CreateSubscription
             };
 
             var id = await _repository.CreateAsync(subscription);
+
             return id;
         }
     }
