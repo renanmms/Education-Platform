@@ -34,7 +34,7 @@ namespace EducationPlatform.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<UserSubscription> GetUserSubscriptionAsync(Guid userId, Guid subscriptionId)
+        public async Task<UserSubscription?> GetUserSubscriptionAsync(Guid userId, Guid subscriptionId)
         {
             var userSubscription = await _dbContext.UserSubscriptions
                 .Include(us => us.User)
