@@ -4,6 +4,18 @@ namespace EducationPlatform.Core.Entities
 {
     public class PaymentSubscription
     {
+        public PaymentSubscription(DateTime processingDate, Status status, string? message, int value, Guid userSubscriptionId, string? paymentLink, string? externalPaymentId, DateTime expirationDate)
+        {
+            ProcessingDate = processingDate;
+            Status = status;
+            Message = message;
+            Value = value;
+            UserSubscriptionId = userSubscriptionId;
+            PaymentLink = paymentLink;
+            ExternalPaymentId = externalPaymentId;
+            ExpirationDate = expirationDate;
+        }
+
         public Guid Id { get; set; }
         public DateTime ProcessingDate { get; set; }
         public Status Status { get; set; }
