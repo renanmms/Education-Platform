@@ -20,6 +20,13 @@ namespace EducationPlatform.Infrastructure.Repositories
             return user.Id;
         }
 
+        public async Task<Guid> FinishClassAsync(UserClassConcluded userClassConcluded)
+        {
+            await _dbContext.FinishedClasses.AddAsync(userClassConcluded);
+
+            return userClassConcluded.Id;
+        }
+
         public async Task<User?> GetByIdAsync(Guid id)
         {
             var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == id);

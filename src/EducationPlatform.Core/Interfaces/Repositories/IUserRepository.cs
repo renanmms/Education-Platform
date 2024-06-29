@@ -7,5 +7,6 @@ namespace EducationPlatform.Core.Interfaces.Repositories
     {
         Task<Guid> CreateAsync(User user);
         Task<User?> GetByIdAsync(Guid id);
+        Task<Guid> FinishClassAsync(UserClassConcluded userClassConcluded);
     }
 }
