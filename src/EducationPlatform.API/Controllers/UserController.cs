@@ -1,5 +1,6 @@
 using EducationPlatform.Application.Commands.CreateUser;
 using EducationPlatform.Application.Queries.GetUser;
+using EducationPlatform.Application.Queries.GetUserSubscription;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,17 @@ namespace EducationPlatform.API.Controllers
             var id = await _mediator.Send(command);
             
             return CreatedAtAction(nameof(GetById), new {id = id}, command);
+        }
+
+        // TODO: Create two endpoints one for user subscription and other for user class concluded
+        [HttpGet("subscription/{id}")]
+        public async Task<IActionResult> GetSubscription(Guid userId, Guid subscriptionId)
+        {
+            var query = new GetUserSubscriptionQuery(userId, subscriptionId);
+
+            var model = await _mediator.Send(query);
+
+            return Ok(model);
         }
     }
 }
