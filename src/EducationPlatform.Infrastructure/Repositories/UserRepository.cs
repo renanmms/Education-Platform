@@ -33,5 +33,12 @@ namespace EducationPlatform.Infrastructure.Repositories
 
             return user;
         }
+
+        public async Task<Guid> SubscribeUserAsync(UserSubscription userSubscription)
+        {
+            await _dbContext.UserSubscriptions.AddAsync(userSubscription);
+
+            return userSubscription.Id;
+        }
     }
 }
