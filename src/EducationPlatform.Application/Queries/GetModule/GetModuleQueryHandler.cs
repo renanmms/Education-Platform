@@ -14,7 +14,9 @@ namespace EducationPlatform.Application.Queries.GetModule
 
         public async Task<GetModuleViewModel> Handle(GetModuleQuery request, CancellationToken cancellationToken)
         {
-            var model = GetModuleViewModel.ToDTO(await _repository.GetByIdAsync(request.Id));
+            var entity = await _repository.GetByIdAsync(request.Id);
+            var model = GetModuleViewModel.ToDTO(entity);
+
             return model;
         }
     }

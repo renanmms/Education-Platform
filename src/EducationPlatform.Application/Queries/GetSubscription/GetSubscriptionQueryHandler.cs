@@ -14,8 +14,10 @@ namespace EducationPlatform.Application.Queries.GetSubscription
 
         public async Task<GetSubscriptionViewModel> Handle(GetSubscriptionQuery request, CancellationToken cancellationToken)
         {
-            var sub = GetSubscriptionViewModel.ToDTO(await _repository.GetByIdAsync(request.Id));
-            return sub;
+            var sub = await _repository.GetByIdAsync(request.Id);
+            var model = GetSubscriptionViewModel.ToDTO(sub);
+
+            return model;
         }
     }
 }
