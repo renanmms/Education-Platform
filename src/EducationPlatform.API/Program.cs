@@ -15,9 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("EducationPlatformCS");
-builder.Services.AddDbContext<EducationPlatformDbContext>(
-    options => options.UseNpgsql(connectionString)
-);
+builder.Services.AddDbContext<EducationPlatformDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
