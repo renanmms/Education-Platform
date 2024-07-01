@@ -14,7 +14,8 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
             builder
                 .HasMany(m => m.Classes)
                 .WithOne(c => c.Module)
-                .HasForeignKey(m => m.ModuleId);
+                .HasForeignKey(m => m.ModuleId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
