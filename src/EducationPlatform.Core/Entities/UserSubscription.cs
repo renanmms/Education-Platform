@@ -13,6 +13,7 @@ namespace EducationPlatform.Core.Entities
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public Guid SubscriptionId { get; set; }
+        public Guid PaymentSubscriptionId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public User User { get; set; } = null!;
