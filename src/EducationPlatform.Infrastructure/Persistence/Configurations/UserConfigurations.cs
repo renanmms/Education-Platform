@@ -11,11 +11,13 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
             builder
                 .HasOne(u => u.UserSubscription)
                 .WithOne(us => us.User)
+                .HasForeignKey<UserSubscription>(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(u => u.UserClassConcluded)
                 .WithOne(uc => uc.User)
+                .HasForeignKey<UserClassConcluded>(uc => uc.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

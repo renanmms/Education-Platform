@@ -15,6 +15,7 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
 
             builder.HasOne(us => us.PaymentSubscription)
                 .WithOne(ps => ps.UserSubscription)
+                .HasForeignKey<UserSubscription>(us => us.PaymentSubscriptionId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
