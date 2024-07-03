@@ -13,13 +13,15 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
             builder
                 .HasOne(c => c.Subscription)
                 .WithMany(s => s.Courses)
-                .HasForeignKey(c => c.SubscriptionId);
+                .HasForeignKey(c => c.SubscriptionId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasMany(c => c.Modules)
                 .WithOne(c => c.Course)
                 .HasForeignKey(c => c.CourseId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
