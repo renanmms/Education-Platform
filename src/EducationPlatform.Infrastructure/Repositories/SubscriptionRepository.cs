@@ -29,6 +29,7 @@ namespace EducationPlatform.Infrastructure.Repositories
         public async Task<Guid> PaySubscritionAsync(PaymentSubscription payment)
         {
             await _dbContext.PaymentSubscriptions.AddAsync(payment);
+            await _dbContext.SaveChangesAsync();
 
             return payment.Id;
         }

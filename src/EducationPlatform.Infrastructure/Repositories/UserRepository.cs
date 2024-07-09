@@ -16,6 +16,7 @@ namespace EducationPlatform.Infrastructure.Repositories
         public async Task<Guid> CreateAsync(User user)
         {
             await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
 
             return user.Id;
         }
@@ -23,6 +24,7 @@ namespace EducationPlatform.Infrastructure.Repositories
         public async Task<Guid> FinishClassAsync(UserClassConcluded userClassConcluded)
         {
             await _dbContext.FinishedClasses.AddAsync(userClassConcluded);
+            await _dbContext.SaveChangesAsync();
 
             return userClassConcluded.Id;
         }
@@ -47,6 +49,7 @@ namespace EducationPlatform.Infrastructure.Repositories
         public async Task<Guid> SubscribeUserAsync(UserSubscription userSubscription)
         {
             await _dbContext.UserSubscriptions.AddAsync(userSubscription);
+            await _dbContext.SaveChangesAsync();
 
             return userSubscription.Id;
         }
