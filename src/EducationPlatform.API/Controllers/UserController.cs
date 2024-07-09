@@ -46,5 +46,38 @@ namespace EducationPlatform.API.Controllers
 
             return Ok(model);
         }
+
+        [HttpPost("create/subscription")]
+        public async Task<IActionResult> Subscribe(SubscribeUserCommand command)
+        {
+            var id = await _mediator.Send(command);
+            // TODO: Pass the subscriptionId and userId in the location header
+            return CreatedAtAction(nameof(GetSubscription), new {id}, command);
+        }
+
+        [HttpGet("{userId}/class/{classId}")]
+        public async Task<IActionResult> GetFinishedClass(Guid userId, Guid classId)
+        {
+            var query = new GetFinishedClassQuery(userId, classId);
+
+            var model = await _mediator.Send(query);
+
+            return Ok(model);
+        }
+
+        [HttpPost("finish/class")]
+        public async Task<IActionResult> FinishClass(FinishClassCommand command)
+        {
+            var id = await _mediator.Send(command);
+
+            return CreatedAtAction(
+                nameof(GetFinishedClass), 
+                new 
+                {
+                    userId = command.UserId,
+                    classId = command.ClassId
+                },
+                command);
+        }
     }
 }
