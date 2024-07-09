@@ -36,6 +36,18 @@ namespace EducationPlatform.Infrastructure.Repositories
             return user;
         }
 
+        public async Task<UserClassConcluded?> GetFinishedClassAsync(Guid userId, Guid classId)
+        {
+            var finishedClass = await _dbContext.FinishedClasses
+                .Include(c => c.Class)
+                    .ThenInclude(c => c.Module)
+                        .ThenInclude(m => m.Course)
+                .Include(c => c.User)
+                .SingleOrDefaultAsync(c => c.ClassId == classId && c.UserId == userId);
+
+            return finishedClass;
+        }
+
         public async Task<UserSubscription?> GetUserSubscriptionAsync(Guid userId, Guid subscriptionId)
         {
             var userSubscription = await _dbContext.UserSubscriptions
