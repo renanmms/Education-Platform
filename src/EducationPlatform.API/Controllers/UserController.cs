@@ -1,4 +1,7 @@
 using EducationPlatform.Application.Commands.CreateUser;
+using EducationPlatform.Application.Commands.FinishClass;
+using EducationPlatform.Application.Commands.SubscribeUser;
+using EducationPlatform.Application.Queries.GetFinishedClass;
 using EducationPlatform.Application.Queries.GetUser;
 using EducationPlatform.Application.Queries.GetUserSubscription;
 using MediatR;
@@ -36,8 +39,7 @@ namespace EducationPlatform.API.Controllers
             return CreatedAtAction(nameof(GetById), new {id = id}, command);
         }
 
-        // TODO: Create two endpoints one for user subscription and other for user class concluded
-        [HttpGet("subscription/{id}")]
+        [HttpGet("{userId}/subscription/{subscriptionId}")]
         public async Task<IActionResult> GetSubscription(Guid userId, Guid subscriptionId)
         {
             var query = new GetUserSubscriptionQuery(userId, subscriptionId);
