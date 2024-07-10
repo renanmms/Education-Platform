@@ -53,8 +53,14 @@ namespace EducationPlatform.API.Controllers
         public async Task<IActionResult> Subscribe(SubscribeUserCommand command)
         {
             var id = await _mediator.Send(command);
-            // TODO: Pass the subscriptionId and userId in the location header
-            return CreatedAtAction(nameof(GetSubscription), new {id}, command);
+            // TODO: Result pattern to show 'User already subscribed' error message
+            return CreatedAtAction(nameof(GetSubscription), 
+                new 
+                {
+                    userId = command.UserId,
+                    subscriptionId = command.SubscriptionId
+                },
+                command);
         }
 
         [HttpGet("{userId}/class/{classId}")]
