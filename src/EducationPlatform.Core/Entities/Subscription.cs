@@ -6,6 +6,6 @@ namespace EducationPlatform.Core.Entities
         public string? Name { get; set; }
         public int Duration { get; set; }
         public List<Course>? Courses { get; set; }
-        public UserSubscription? UserSubscription { get; set; }
+        public ICollection<UserSubscription>? UserSubscriptions { get; set; }
     }
 }
