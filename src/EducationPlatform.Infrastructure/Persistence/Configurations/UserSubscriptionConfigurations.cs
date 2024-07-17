@@ -10,8 +10,8 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
         {
             builder
                 .HasOne(us => us.User)
-                .WithMany(u => u.UserSubscriptions)
-                .HasForeignKey(us => us.UserId)
+                .WithOne(u => u.UserSubscription)
+                .HasForeignKey<UserSubscription>(us => us.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(us => us.Subscription)
