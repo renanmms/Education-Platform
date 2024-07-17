@@ -8,11 +8,6 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder
-                .HasMany(u => u.UserSubscriptions)
-                .WithOne(us => us.User)
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasMany(u => u.FinishedClasses)
