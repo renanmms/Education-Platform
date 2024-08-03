@@ -24,7 +24,7 @@ namespace EducationPlatform.Core.Entities
         public string? Phone { get; set; }
         public Role Role { get; set; }
         public bool IsActive { get; set; }
-        public UserSubscription? UserSubscription { get; set; } // Reference navigation to dependent
-        public UserClassConcluded? UserClassConcluded { get; set; }
+        public UserSubscription UserSubscription { get; set; }
+        public ICollection<UserClassConcluded> FinishedClasses { get; } = [];
     }
 }

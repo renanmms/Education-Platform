@@ -16,6 +16,6 @@ namespace EducationPlatform.Core.Entities
         public int Duration { get; set; }
         public Guid ModuleId { get; set; }
         public Module Module { get; set; } = null!;
-        public UserClassConcluded? UserClassConcluded { get; set; }
+        public ICollection<UserClassConcluded?> FinishedClasses { get; set; }
     }
 }

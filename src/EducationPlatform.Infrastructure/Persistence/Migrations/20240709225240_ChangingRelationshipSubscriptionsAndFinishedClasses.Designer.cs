@@ -4,16 +4,19 @@ using EducationPlatform.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EducationPlatform.Infrastructure.Migrations
+namespace EducationPlatform.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EducationPlatformDbContext))]
-    partial class EducationPlatformDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240709225240_ChangingRelationshipSubscriptionsAndFinishedClasses")]
+    partial class ChangingRelationshipSubscriptionsAndFinishedClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,7 +213,8 @@ namespace EducationPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId");
+                    b.HasIndex("ClassId")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -237,10 +241,10 @@ namespace EducationPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SubscriptionId");
-
-                    b.HasIndex("UserId")
+                    b.HasIndex("SubscriptionId")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserSubscriptions");
                 });
@@ -292,8 +296,8 @@ namespace EducationPlatform.Infrastructure.Migrations
             modelBuilder.Entity("EducationPlatform.Core.Entities.UserClassConcluded", b =>
                 {
                     b.HasOne("EducationPlatform.Core.Entities.Classroom", "Class")
-                        .WithMany("FinishedClasses")
-                        .HasForeignKey("ClassId")
+                        .WithOne("UserClassConcluded")
+                        .HasForeignKey("EducationPlatform.Core.Entities.UserClassConcluded", "ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -311,14 +315,14 @@ namespace EducationPlatform.Infrastructure.Migrations
             modelBuilder.Entity("EducationPlatform.Core.Entities.UserSubscription", b =>
                 {
                     b.HasOne("EducationPlatform.Core.Entities.Subscription", "Subscription")
-                        .WithMany("UserSubscriptions")
-                        .HasForeignKey("SubscriptionId")
+                        .WithOne("UserSubscription")
+                        .HasForeignKey("EducationPlatform.Core.Entities.UserSubscription", "SubscriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EducationPlatform.Core.Entities.User", "User")
-                        .WithOne("UserSubscription")
-                        .HasForeignKey("EducationPlatform.Core.Entities.UserSubscription", "UserId")
+                        .WithMany("UserSubscriptions")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -329,7 +333,7 @@ namespace EducationPlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("EducationPlatform.Core.Entities.Classroom", b =>
                 {
-                    b.Navigation("FinishedClasses");
+                    b.Navigation("UserClassConcluded");
                 });
 
             modelBuilder.Entity("EducationPlatform.Core.Entities.Course", b =>
@@ -346,15 +350,14 @@ namespace EducationPlatform.Infrastructure.Migrations
                 {
                     b.Navigation("Courses");
 
-                    b.Navigation("UserSubscriptions");
+                    b.Navigation("UserSubscription");
                 });
 
             modelBuilder.Entity("EducationPlatform.Core.Entities.User", b =>
                 {
                     b.Navigation("FinishedClasses");
 
-                    b.Navigation("UserSubscription")
-                        .IsRequired();
+                    b.Navigation("UserSubscriptions");
                 });
 
             modelBuilder.Entity("EducationPlatform.Core.Entities.UserSubscription", b =>

@@ -4,15 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EducationPlatform.Infrastructure.Persistence.Configurations
 {
-    public class UserConfigurations : IEntityTypeConfiguration<User>
+    public class ClassroomConfigurations : IEntityTypeConfiguration<Classroom>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Classroom> builder)
         {
-
-            builder
-                .HasMany(u => u.FinishedClasses)
-                .WithOne(uc => uc.User)
-                .HasForeignKey(uc => uc.UserId)
+            builder.HasMany(c => c.FinishedClasses)
+                .WithOne(fc => fc.Class)
+                .HasForeignKey(fc => fc.ClassId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
