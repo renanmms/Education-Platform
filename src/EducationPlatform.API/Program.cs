@@ -1,3 +1,4 @@
+using EducationPlatform.API;
 using EducationPlatform.API.Filters;
 using EducationPlatform.Application.Commands.CreateCourse;
 using EducationPlatform.Core.Interfaces.Repositories;
@@ -17,11 +18,7 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("EducationPlatformCS");
 builder.Services.AddDbContext<EducationPlatformDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
-builder.Services.AddScoped<IModuleRepository, ModuleRepository>();
-builder.Services.AddScoped<IClassRepository, ClassRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddInfrastructure();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCourseCommand>());
 
