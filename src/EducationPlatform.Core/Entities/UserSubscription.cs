@@ -15,8 +15,8 @@ namespace EducationPlatform.Core.Entities
         public Guid SubscriptionId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public User User { get; set; } = null!;
+        public User User { get; set; } = null!; // TODO: Qual a diferença entre utilizar o null! e sem
         public Subscription? Subscription { get; set; }
-        public PaymentSubscription? PaymentSubscription { get; set; }
+        public PaymentSubscription? PaymentSubscription { get; set; } // TODO: Verificar relacionamento
     }
 }
