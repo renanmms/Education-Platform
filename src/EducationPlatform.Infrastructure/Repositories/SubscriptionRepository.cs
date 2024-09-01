@@ -17,12 +17,14 @@ namespace EducationPlatform.Infrastructure.Repositories
         {
             await _dbContext.Subscriptions.AddAsync(subscription);
             await _dbContext.SaveChangesAsync();
+
             return subscription.Id;
         }
 
         public async Task<Subscription?> GetByIdAsync(Guid id)
         {
             var sub =  await _dbContext.Subscriptions.SingleOrDefaultAsync(s => s.Id == id);
+
             return sub;
         }
 

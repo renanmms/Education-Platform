@@ -17,6 +17,7 @@ namespace EducationPlatform.Infrastructure.Repositories
         {
             await _dbContext.Classes.AddAsync(myClass);
             await _dbContext.SaveChangesAsync();
+
             return myClass.Id;
         }
 
@@ -24,6 +25,7 @@ namespace EducationPlatform.Infrastructure.Repositories
         public async Task<Classroom?> GetByIdAsync(Guid id)
         {
             var classroom = await _dbContext.Classes.SingleOrDefaultAsync(c => c.Id == id);
+
             return classroom;
         }
     }

@@ -18,12 +18,14 @@ namespace EducationPlatform.Infrastructure.Repositories
         {
             await _dbContext.Courses.AddAsync(course);
             await _dbContext.SaveChangesAsync();
+
             return course.Id;
         }
 
         public async Task<Course?> GetByIdAsync(Guid id)
         {
             var course = await _dbContext.Courses.SingleOrDefaultAsync(c => c.Id == id);
+
             return course;
         }
     }

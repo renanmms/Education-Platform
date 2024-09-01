@@ -17,12 +17,14 @@ namespace EducationPlatform.Infrastructure.Repositories
         {
             await _dbContext.Modules.AddAsync(module);
             await _dbContext.SaveChangesAsync();
+
             return module.Id;
         }
 
         public async Task<Module?> GetByIdAsync(Guid id)
         {
             var module = await _dbContext.Modules.SingleOrDefaultAsync(m => m.Id == id);
+
             return module;
         }
     }
